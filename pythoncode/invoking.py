@@ -5,4 +5,3 @@ if __name__ == '__main__':
     no_parameter()
     print(have_return("返回值1"))
     print(no_retrun())
-

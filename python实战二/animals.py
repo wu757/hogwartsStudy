@@ -38,7 +38,6 @@ class Dog(Animal):
     def call(self):
         print(f"{self.name} 汪汪叫")
 
-
 with open("python实战二/animal_data.yaml", "rb") as f:
     animalData = yaml.safe_load(f)
 

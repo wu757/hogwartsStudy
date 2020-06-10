@@ -4,6 +4,7 @@ cat:
   age: 2
   gender: female
   hair: short hair
+
 dog:
   name: 小狼狗
   color: white

@@ -13,4 +13,5 @@ class Calculator:
       try:
           return a/b
       except ZeroDivisionError:
+          print("除数不能为0")
           return False

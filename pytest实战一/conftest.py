@@ -7,11 +7,6 @@ def init_cal():
     实例化Calculator
     :return:
     '''
-    return calculator.Calculator()
-@pytest.fixture(autouse=True)
-def setup():
     print("\n开始计算")
-
-@pytest.fixture(autouse=True)
-def teardown():
-    print("计算结束")
+    yield calculator.Calculator()
+    print("\n计算结束")

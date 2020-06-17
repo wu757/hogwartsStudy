@@ -1,5 +1,5 @@
 import pytest
-from pytest实战一 import calculator
+from pytest实战二 import calculator
 
 @pytest.fixture(autouse=True)
 def init_cal():

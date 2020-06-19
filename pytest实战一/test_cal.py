@@ -1,10 +1,11 @@
 import pytest
 import yaml
 
-with open("./data_cal.yaml",'rb') as f:
-    test_data=yaml.safe_load(f)
+with open("./data_cal.yaml", 'rb') as f:
+    test_data = yaml.safe_load(f)
 
 class TestCal():
+
     @pytest.mark.parametrize("a,b,expect",test_data["add"])
     def test_add(self,a,b,expect,init_cal):
         assert init_cal.add(a,b)==expect

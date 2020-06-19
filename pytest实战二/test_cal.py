@@ -48,3 +48,6 @@ class TestCal():
     @pytest.mark.parametrize("a,b,expect", test_data["div"])
     def check_div(self, a, b, expect, init_cal):
         assert init_cal.div(a, b) == expect
+
+if __name__ == '__main__':
+    pytest.main()

@@ -1,6 +1,6 @@
 import json
 import time
-
+import pytest
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
@@ -8,10 +8,10 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 
 class TestCookie():
-    def setup(self):
+    def setup_class(self):
         self.driver=webdriver.Chrome()
         self.driver.get("https://work.weixin.qq.com/wework_admin/loginpage_wx")
-    def teardown(self):
+    def teardown_class(self):
         self.driver.quit()
         
     # def test_get_cookie(self):
@@ -28,10 +28,14 @@ class TestCookie():
         # self.driver.refresh()
 
         wait=WebDriverWait(self.driver, 5)
-        while True:
+        el=None
+        for i in range(3):
             self.driver.refresh()
-            el=wait.\
-                until(expected_conditions.element_to_be_clickable((By.ID,"menu_index")))
+            try:
+                el=wait.\
+                    until(expected_conditions.element_to_be_clickable((By.ID,"menu_index")))
+            except Exception:
+                print("重试%d次"%(i+1))
             if el is not None:
                 break
         wait.until(expected_conditions.element_to_be_clickable

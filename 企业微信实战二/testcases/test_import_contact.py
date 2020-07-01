@@ -1,6 +1,5 @@
 import time
 
-from 企业微信实战二.page.add_member_page import AddMember
 from 企业微信实战二.page.main_page import MainPage
 
 
@@ -9,8 +8,7 @@ class TestImportContact():
         self.main = MainPage()
 
     def test_import_contact(self):
-        assert AddMember.name in self.main.goto_add_member().add_member().get_member()
-
+        assert "张三" in self.main.goto_import_contact().batch_import().get_member()
 
     def teardown_class(self):
         time.sleep(10)

@@ -8,11 +8,11 @@ from 企业微信实战二.page.contact_page import Contact
 
 
 class AddMember(BasePage):
-
     _username = "username"
-    name=f"name{round(time.time())}"
-    _account=f"account{round(time.time())}"
-    _phone="159%08d" % random.randint(0,99999999)
+    name = f"name{round(time.time())}"
+    _account = f"account{round(time.time())}"
+    _phone = "159%08d" % random.randint(0, 99999999)
+
     def add_member(self):
         """
         添加成员

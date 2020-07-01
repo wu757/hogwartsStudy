@@ -1,6 +1,5 @@
 import json
-import time
-import pytest
+
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
@@ -9,11 +8,12 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 class TestCookie():
     def setup_class(self):
-        self.driver=webdriver.Chrome()
+        self.driver = webdriver.Chrome()
         self.driver.get("https://work.weixin.qq.com/wework_admin/loginpage_wx")
+
     def teardown_class(self):
         self.driver.quit()
-        
+
     # def test_get_cookie(self):
     #     time.sleep(15)
     #     cookies=self.driver.get_cookies()
@@ -21,25 +21,25 @@ class TestCookie():
     #         json.dump(cookies,f)
 
     def test_cookie_login(self):
-        cookies=json.load(open("cookies.json"))
+        cookies = json.load(open("cookies.json"))
         for cookie in cookies:
             self.driver.add_cookie(cookie)
         # time.sleep(10)
         # self.driver.refresh()
 
-        wait=WebDriverWait(self.driver, 5)
-        el=None
+        wait = WebDriverWait(self.driver, 5)
+        el = None
         for i in range(3):
             self.driver.refresh()
             try:
-                el=wait.\
-                    until(expected_conditions.element_to_be_clickable((By.ID,"menu_index")))
+                el = wait. \
+                    until(expected_conditions.element_to_be_clickable((By.ID, "menu_index")))
             except Exception:
-                print("重试%d次"%(i+1))
+                print("重试%d次" % (i + 1))
             if el is not None:
                 break
         wait.until(expected_conditions.element_to_be_clickable
-                                             ((By.CSS_SELECTOR, ".index_service_cnt_itemWrap:nth-child(2)")))
+                   ((By.CSS_SELECTOR, ".index_service_cnt_itemWrap:nth-child(2)")))
         self.driver.find_element(By.CSS_SELECTOR, ".index_service_cnt_itemWrap:nth-child(2)").click()
         wait.until(
             expected_conditions.presence_of_element_located((By.ID, "js_upload_file_input")))
@@ -53,7 +53,3 @@ class TestCookie():
         # assert_ele = self.find(By.ID, "upload_file_name").text
         print(assert_ele)
         assert assert_ele == "workbook.xlsx"
-
-
-
-            

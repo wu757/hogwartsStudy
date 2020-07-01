@@ -29,6 +29,7 @@ class BasePage():
             json.dump(cookies, f)
 
     def cookie_login(self):
+        #从文件中读cookie，并将cookie添加到浏览器中
         cookies = json.load(open("cookies.json"))
         for cookie in cookies:
             # 解决selenium.common.exceptions.InvalidArgumentException: Message: invalid argument: invalid ‘expiry’
@@ -36,6 +37,7 @@ class BasePage():
                 cookie["expiry"] = int(cookie["expiry"])
             self.driver.add_cookie(cookie)
         el = None
+        #浏览器加入cookie后重试3次刷新
         for i in range(3):
             self.driver.refresh()
             try:
@@ -55,11 +57,14 @@ class BasePage():
     def quit(self):
         return self.driver.quit()
 
+    # 封装element_to_be_clickable显性等待
     def wait_with_clickable(self, by, value):
         return WebDriverWait(self.driver, 5).until(EC.element_to_be_clickable((by, value)))
 
+    # 封装visibility_of_element_located显性等待
     def wait_with_visibility(self, by, value):
         return WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located((by, value)))
 
+    # 封装visibility_of_all_elements_located显性等待，返回元素列表
     def waits_with_visibility(self, by, value):
         return WebDriverWait(self.driver, 5).until(EC.visibility_of_all_elements_located((by, value)))

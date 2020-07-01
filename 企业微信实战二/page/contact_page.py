@@ -7,6 +7,7 @@ from 企业微信实战二.page.base_page import BasePage
 
 
 class Contact(BasePage):
+    #待导入的表格文件的绝对路径
     _contact_sheet = os.path.join(os.getcwd(), "contact.xlsx")
 
     def get_member(self):
@@ -22,6 +23,8 @@ class Contact(BasePage):
         return name_list
 
     def del_member(self, name):
+        #点击name，这条数据，并删除ta
+        #显性等待后再做点击操作
         self.wait_with_visibility(By.XPATH, f"//*[@title='{name}']/../td[1]/input").click()
         self.wait_with_visibility(By.XPATH, "//div[@class='ww_operationBar']//*[text()='删除']").click()
         self.wait_with_visibility(By.XPATH, "//*[text()='确认']").click()

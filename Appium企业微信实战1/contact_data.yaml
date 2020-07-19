@@ -1,0 +1,14 @@
+name_contact1: &name1
+  name_aa
+name_contact2: &name2
+  name_bb
+
+add_contact:
+  - - *name1
+    - 159000000011
+  - - *name2
+    - 159000000012
+
+del_contact:
+  - *name1
+  - *name2

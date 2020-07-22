@@ -31,9 +31,11 @@ class TestWeChat:
             print("\n无\"选择以下同事一起使用\"页面")
         else:
             self.driver.find_element_by_xpath("//*[@text='跳过']").click()
+
     def setup(self):
         self.wait.until(EC.visibility_of_element_located((MobileBy.XPATH, "//*[@text='通讯录']"))).click()
         self.wait.until(EC.visibility_of_element_located((MobileBy.XPATH, "//*[@text='企业通讯录']")))
+
     def teardown(self):
         # 返回至首页
         for i in range(4):
@@ -46,7 +48,7 @@ class TestWeChat:
                 break
 
     def teardown_class(self):
-        time.sleep(10000)
+        time.sleep(1000)
         self.driver.quit()
 
     @pytest.mark.dependency(name="addContact")
@@ -73,9 +75,9 @@ class TestWeChat:
     @pytest.mark.run(order=2)
     def test_del_contact(self,name):
         self.driver.find_element_by_id("com.tencent.wework:id/h9u").click()
-        self.driver.find_element_by_android_uiautomator('new UiScrollable(new UiSelector().scrollable(true).'
-                                                        'instance(0)).scrollIntoView(new UiSelector().'
-                                                        f'text("{name}").instance(0));').click()
+        self.wait.until(EC.visibility_of_element_located((MobileBy.XPATH, "//*[@text='管理通讯录']")))
+        self.driver.find_element(MobileBy.ANDROID_UIAUTOMATOR, 'new UiScrollable(new UiSelector().scrollable(true).'
+                                                               f'instance(0)).scrollIntoView(new UiSelector().text("{name}").instance(0));').click()
 
         self.driver.find_element_by_xpath("//*[@text='删除成员']").click()
         self.driver.find_element_by_xpath("//*[@text='确定']").click()

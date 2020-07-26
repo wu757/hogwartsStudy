@@ -42,9 +42,10 @@ class TestWeChat:
             try:
                 WebDriverWait(self.driver, 1).until(EC.visibility_of_element_located((MobileBy.XPATH, "//*[@text='消息']")))
             except TimeoutException:
-                print("\n返回到至首页")
+                print("\n返回")
                 self.driver.back()
             else:
+                print("\n已返回至首页")
                 break
 
     def teardown_class(self):
@@ -78,7 +79,7 @@ class TestWeChat:
         self.wait.until(EC.visibility_of_element_located((MobileBy.XPATH, "//*[@text='管理通讯录']")))
         self.driver.find_element(MobileBy.ANDROID_UIAUTOMATOR, 'new UiScrollable(new UiSelector().scrollable(true).'
                                                                f'instance(0)).scrollIntoView(new UiSelector().text("{name}").instance(0));').click()
-
+        
         self.driver.find_element_by_xpath("//*[@text='删除成员']").click()
         self.driver.find_element_by_xpath("//*[@text='确定']").click()
         # "×"关闭按钮
